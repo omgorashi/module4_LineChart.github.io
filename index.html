@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart Visualization</title>
+    <script src="d3.js"></script>
+</head>
+<body>
+    <div id="chart"></div>
+    <script src="charts.js"></script>
+    <script>
+
+        function lineChart(data, svg, fillColor) {
+            var yScale = d3.scaleLinear().domain([0, 20]).range([0, 200]);
+
+            var xLine = d3.line()
+                .x(function(d, i) { return i * 15; })
+                .y(function(d, i) { return yScale(d.x); });
+
+            var yLine = d3.line()
+                .x(function(d, i) { return i * 15; })
+                .y(function(d, i) { return yScale(d.y); });
+
+            svg.append("path")
+                .datum(data)
+                .attr("d", xLine)
+                .attr("fill", "none")
+                .attr("stroke", "black");
+
+            svg.append("path")
+                .datum(data)
+                .attr("d", yLine)
+                .attr("fill", "none")
+                .attr("stroke", "red")
+                .attr("opacity", 0.5);
+        }
+
+        var svg1 = d3.select("#chart").append("svg").attr("width", 200).attr("height", 200);
+        lineChart(set1, svg1);
+
+        var svg2 = d3.select("#chart").append("svg").attr("width", 200).attr("height", 200);
+        lineChart(set2, svg2);
+
+        var svg3 = d3.select("#chart").append("svg").attr("width", 200).attr("height", 200);
+        lineChart(set3, svg3);
+
+        var svg4 = d3.select("#chart").append("svg").attr("width", 200).attr("height", 200);
+        lineChart(set4, svg4);
+    </script>
+</body>
+</html>
